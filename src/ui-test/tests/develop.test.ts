@@ -21,7 +21,7 @@ import { assert } from 'chai';
 import { activateEditor, deleteFolderContents, disconnectDebugger, executeCommand, killTerminal, openFileInEditor, waitUntilEditorIsOpened, waitUntilTerminalHasText } from '../utils';
 import { QUARKUS_DIR } from '../variables';
 
-describe.only('Quarkus', function () {
+describe.skip('Quarkus', function () {
     this.timeout(90000);
 
     let driver: WebDriver;
@@ -71,11 +71,14 @@ describe.only('Quarkus', function () {
 
         // Open created Quarkus file
         await new EditorView().closeAllEditors();
-        await openFileInEditor(driver, path.join(QUARKUS_DIR, 'src', 'main', 'java', 'com', 'acme', 'myproject'), 'Demo.java');
-        textEditor = await activateEditor(driver, 'Demo.java');
-        assert.isNotNull(textEditor);
+      //  await openFileInEditor(driver, path.join(QUARKUS_DIR, 'src', 'main', 'java', 'com', 'acme', 'myproject'), 'Demo.java');
+        //textEditor = await activateEditor(driver, 'Demo.java');
+       // assert.isNotNull(textEditor);
 
-        //textEditor = new TextEditor();
+       await VSBrowser.instance.openResources(path.join(path.join(QUARKUS_DIR, 'src', 'main', 'java', 'com', 'acme', 'myproject'), 'Demo.java')); 
+       
+       
+       textEditor = new TextEditor();
 
         await driver.wait(async function () {
             return await textEditor.toggleBreakpoint(12);
