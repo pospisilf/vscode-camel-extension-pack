@@ -54,7 +54,6 @@ jobs:
         run: npm run compile
 
       - name: ⚙️ Allow unprivileged user namespace (ubuntu)
-        if: ${{ startsWith(matrix.os, 'ubuntu') }}
         run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
 
       - name: UI test
